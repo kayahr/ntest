@@ -65,10 +65,10 @@ const mappings: Array<{ ntest: string[], node: string[], nodeVersion?: number }>
         node: [ "--test-reporter=spec", "--test-reporter-destination=stdout" ]
     },
     {
-        ntest: [ "--reporter=spec", "--reporter=lcov:C:/lcov.json" ],
+        ntest: [ "--reporter=spec", "--reporter=lcov:C:/lcov.info" ],
         node: [
             "--test-reporter=spec", "--test-reporter-destination=stdout",
-            "--test-reporter=lcov", "--test-reporter-destination=C:/lcov.json"
+            "--test-reporter=lcov", "--test-reporter-destination=C:/lcov.info"
         ]
     },
     {

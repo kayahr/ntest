@@ -35,7 +35,7 @@ Write an `ntest.json` configuration file:
     "files": "src/**/*.test.js",
     "reporter": [
         { "name": "spec" },
-        { "name": "lcov", "destination": "lib/lcov.json" }
+        { "name": "lcov", "destination": "lib/lcov.info" }
     ],
     "coverage": {
         "enabled": true
