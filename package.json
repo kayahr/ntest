@@ -1,0 +1,76 @@
+{
+    "$schema": "http://json.schemastore.org/package",
+    "name": "@kayahr/ntest",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "CLI wrapper for the Node.js Test Runner adding configuration file support",
+    "keywords": [
+        "cli",
+        "wrapper",
+        "npm",
+        "node",
+        "test",
+        "tests",
+        "unit",
+        "unit test",
+        "unit tests",
+        "runner",
+        "test runner"
+    ],
+    "license": "MIT",
+    "author": {
+        "name": "Klaus Reimer",
+        "email": "k@ailis.de"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kayahr/ntest.git"
+    },
+    "homepage": "https://github.com/kayahr/ntest",
+    "bugs": "https://github.com/kayahr/ntest/issues",
+    "funding": "https://github.com/kayahr/ntest?sponsor=1",
+    "publishConfig": {
+        "access": "public"
+    },
+    "files": [
+        "ntest.schema.json",
+        "lib/main/",
+        "src/main/"
+    ],
+    "bin": {
+        "ntest": "lib/main/ntest.js"
+    },
+    "engines": {
+        "node": ">=22"
+    },
+    "devEngines": {
+        "runtime": {
+            "name": "node",
+            "version": ">=24",
+            "onFail": "error"
+        },
+        "packageManager": {
+            "name": "npm",
+            "version": ">=11",
+            "onFail": "error"
+        }
+    },
+    "scripts": {
+        "clean": "rm -rf lib",
+        "build": "run build:*",
+        "build:compile": "tsc",
+        "test": "run test:*",
+        "test:unit": "node lib/main/ntest.js",
+        "test:lint": "oxlint --type-aware --deny-warnings",
+        "test:spell": "cspell --color --no-progress",
+        "prepare": "run clean build",
+        "start": "node lib/main/ntest.js"
+    },
+    "devDependencies": {
+        "@kayahr/cspell": "9.2.1-bundle.2",
+        "@kayahr/npm-utils": "0.0.2",
+        "@kayahr/oxlint-config": "1.0.1",
+        "@types/node": "24.5.2",
+        "typescript": "5.9.2"
+    }
+}

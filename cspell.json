@@ -1,0 +1,21 @@
+{
+    "version": "0.2",
+    "language": "en-US",
+    "files": [
+        "**/*"
+    ],
+    "ignorePaths": [
+        "package-lock.json"
+    ],
+    "enableFiletypes": [
+        "*"
+    ],
+    "words": [
+        "kayahr",
+        "ntest",
+        "oxlint",
+        "Reimer",
+        "tsgolint"
+    ],
+    "useGitignore": true
+}

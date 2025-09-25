@@ -1,0 +1,191 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ntest configuration",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "files": {
+            "description": "List of test files to run or glob patterns to match test files.",
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "reporter": {
+            "description": "Reporters and output destinations to use. Standard \"spec\" reporter outputting to stdout is used if not specified.",
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/Reporter"
+            }
+        },
+        "concurrency": {
+            "description": "Specify test runner concurrency.",
+            "type": "number",
+            "minimum": 1
+        },
+        "isolation": {
+            "description": "Configures the type of test isolation. If set to 'process', each test file runs in a separate child process. If set to 'none', all test files run in the current process.",
+            "type": "string",
+            "enum": [
+                "process",
+                "none"
+            ],
+            "default": "process"
+        },
+        "moduleMocks": {
+            "description": "Enable module mocking in the test runner.",
+            "type": "boolean"
+        },
+        "forceExit": {
+            "description": "Force test runner to exit upon completion.",
+            "type": "boolean"
+        },
+        "only": {
+            "description": "Run tests with 'only' option set.",
+            "type": "boolean"
+        },
+        "shard": {
+            "description": "Run test at specific shard (e.g. \"1/3\").",
+            "type": "string"
+        },
+        "testPattern": {
+            "description": "Run tests whose name matches this regular expression.",
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "skipPattern": {
+            "description": "Run tests whose name do not match this regular expression.",
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "timeout": {
+            "description": "Specify test runner timeout in milliseconds.",
+            "type": "number",
+            "minimum": 0
+        },
+        "updateSnapshots": {
+            "description": "Regenerate test snapshots.",
+            "type": "boolean"
+        },
+        "rerunFailures": {
+            "description": "Path to the rerun state file.",
+            "type": "string"
+        },
+        "globalSetup": {
+            "description": "Path to the global setup file.",
+            "type": "string"
+        },
+        "watch": {
+            "description": "Run in watch mode.",
+            "type": "boolean"
+        },
+        "coverage": {
+            "$ref": "#/$defs/Coverage"
+        }
+    },
+    "$defs": {
+        "Reporter": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "description": "Reporter name (e.g., \"spec\", \"tap\", \"junit\").",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "destination": {
+                    "description": "Optional output destination (e.g., \"stdout\", \"stderr\", or a file path).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "Coverage": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Optional coverage thresholds (only used when coverage is enabled).",
+            "properties": {
+                "enabled": {
+                    "description": "Enable code coverage in the test runner.",
+                    "type": "boolean"
+                },
+                "include": {
+                    "description": "Include files in coverage report that match this glob pattern.",
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ]
+                },
+                "exclude": {
+                    "description": "Exclude files from coverage report that match this glob pattern.",
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ]
+                },
+                "lines": {
+                    "description": "The line coverage minimum threshold (percentage 0-100).",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "branches": {
+                    "description": "The branch coverage minimum threshold (percentage 0-100).",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "functions": {
+                    "description": "The function coverage minimum threshold (percentage 0-100).",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                }
+            }
+        }
+    }
+}

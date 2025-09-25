@@ -1,0 +1,7 @@
+{
+    "$schema": "../../../../ntest.schema.json",
+    "files": "src/test/**/*.test.ts",
+    "coverage": {
+        "enabled": true
+    }
+}

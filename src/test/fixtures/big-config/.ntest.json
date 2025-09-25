@@ -1,0 +1,30 @@
+{
+    "$schema": "../../../../ntest.schema.json",
+    "files": [
+        "files1",
+        "files2"
+    ],
+    "concurrency": 12,
+    "forceExit": true,
+    "globalSetup": "global.js",
+    "isolation": "none",
+    "moduleMocks": true,
+    "only": true,
+    "reporter": [
+        { "name": "dot" },
+        { "name": "junit", "destination": "C:/junit.xml" }
+    ],
+    "rerunFailures": "state",
+    "shard": "2/4",
+    "skipPattern": [
+        "skip1",
+        "skip2"
+    ],
+    "testPattern": [
+        "test1",
+        "test2"
+    ],
+    "timeout": 1234,
+    "updateSnapshots": true,
+    "watch": true
+}

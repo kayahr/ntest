@@ -1,0 +1,10 @@
+{
+    "name": "package-config",
+    "version": "1.0.0",
+    "ntest": {
+        "coverage": {
+            "enabled": true
+        },
+        "files": "src/test/**/*.test.js"
+    }
+}
