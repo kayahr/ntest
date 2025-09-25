@@ -2,12 +2,11 @@
 
 [GitHub] | [NPM]
 
-CLI wrapper for the [Node.js Test Runner] adding configuration file support.
+CLI wrapper for the [Node.js test runner] that adds configuration file support.
 
-The Node.js Test runner gets better and better in every Node.js version. But the command-line interface of it is terrible. To effectively use the test runner you have to pass a lot of long command line options to Node. `ntest` tries to solve these problems with a more intuitive CLI interface and configuration file support. Hopefully one day `ntest` is no longer needed and you can simply use the Node CLI directly.
+The Node.js test runner gets better with every Node.js release, but its command-line interface is clunky. To use it effectively, you often have to pass many long options to Node. `ntest` aims to solve this with a more intuitive CLI and configuration file support. Ideally, one day `ntest` won’t be necessary and you can use the Node CLI directly.
 
-Note that `ntest` is just a simple CLI wrapper. It converts its own command line options and the settings read from the optional configuration file into Node command line options. So `ntest` can only support features which can be controlled via Node command line options. `ntest` does not use the programmatic Node.js Test Runner API.
-
+Note: `ntest` is a simple CLI wrapper. It translates its own options, and settings read from an optional configuration file, into Node command-line flags. As a result, ntest can only support features that are controllable via Node's CLI options. It does not use the programmatic Node.js test runner API.
 
 ## Usage
 

@@ -3,7 +3,7 @@
     "name": "@kayahr/ntest",
     "version": "1.0.0",
     "type": "module",
-    "description": "CLI wrapper for the Node.js Test Runner adding configuration file support",
+    "description": "CLI wrapper for the Node.js test runner that adds configuration file support.",
     "keywords": [
         "cli",
         "wrapper",
