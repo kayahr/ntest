@@ -226,6 +226,7 @@ describe("ntest", () => {
     });
     it("runs Node Test with correct options from big configuration", async (t) => {
         const params = captureSpawn(t);
+        t.mock.property(process.versions, "node", "24.0.0");
         await withProject("big-config", () => main(io, []));
         assert.deepEqual(params, [
             "--test",

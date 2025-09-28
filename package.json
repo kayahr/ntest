@@ -41,12 +41,12 @@
         "ntest": "lib/main/ntest.js"
     },
     "engines": {
-        "node": ">=22"
+        "node": ">=22.18.0"
     },
     "devEngines": {
         "runtime": {
             "name": "node",
-            "version": ">=24",
+            "version": ">=22.18.0",
             "onFail": "error"
         },
         "packageManager": {
@@ -68,8 +68,8 @@
     },
     "devDependencies": {
         "@kayahr/cspell": "9.2.1-bundle.2",
-        "@kayahr/npm-utils": "0.0.2",
-        "@kayahr/oxlint-config": "1.0.1",
+        "@kayahr/npm-utils": "0.0.6",
+        "@kayahr/oxlint-config": "1.0.4",
         "@types/node": "24.5.2",
         "typescript": "5.9.2"
     }
