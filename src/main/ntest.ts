@@ -32,6 +32,9 @@ interface NTestOptions {
     /** List of test files to run or glob patterns to match test files. */
     files?: string | string[];
 
+    /** Enables source map support for stack traces. */
+    sourceMaps?: boolean;
+
     /**
      * Reporters and output destinations to use. Standard "spec" reporter outputting to "stdout"
      * is used if not specified. When destination is not set or empty then "stdout" is assumed
@@ -129,6 +132,7 @@ Options:
                                Optional output file (or stdout/stderr) can be specified. Default output is stdout
   --rerun-failures             specifies the path to the rerun state file
   --shard <index/total>        run test at specified shard
+  --source-maps                enables source map support.
   --skip-pattern, -s <regex>   skip tests whose name matches this regular expression. Can be used multiple times
   --test-pattern, -t <regex>   run tests whose name matches this regular expression. Can be used multiple times
   --timeout <n>                specify test runner timeout in milliseconds
@@ -136,10 +140,6 @@ Options:
   --watch, -w                  run in watch mode
   --help                       display this help and exit
   --version                    output version information and exit
-
-Additional Node options can be specified after '--'. Example:
-
-  ntest --coverage -- --no-warnings
 
 Report bugs to <${packageJSON.bugs}>.
 `;
@@ -217,10 +217,10 @@ async function runNodeTest(io: IO, options: NTestOptions): Promise<void> {
     const coverage = options.coverage;
     if (coverage?.enabled === true) {
         params.push("--experimental-test-coverage");
-        for (const exclude of [ coverage?.exclude ?? []].flat()) {
+        for (const exclude of [ coverage?.exclude ?? [] ].flat()) {
             params.push(`--test-coverage-exclude=${exclude}`);
         }
-        for (const include of [ coverage?.include ?? []].flat()) {
+        for (const include of [ coverage?.include ?? [] ].flat()) {
             params.push(`--test-coverage-include=${include}`);
         }
         if (coverage?.branches != null) {
@@ -287,6 +287,9 @@ async function runNodeTest(io: IO, options: NTestOptions): Promise<void> {
     if (options?.watch === true) {
         params.push("--watch");
     }
+    if (options?.sourceMaps === true) {
+        params.push("--enable-source-maps");
+    }
 
     // Append test file globs
     for (const pattern of [ options?.files ?? []].flat()) {
@@ -328,6 +331,7 @@ export async function main(args: string[], io: IO = process): Promise<number> {
                 reporter: { type: "string", multiple: true },
                 "rerun-failures": { type: "string" },
                 shard: { type: "string" },
+                "source-maps": { type: "boolean" },
                 "skip-pattern": { type: "string", multiple: true, short: "s" },
                 "test-pattern": { type: "string", multiple: true, short: "t" },
                 timeout: { type: "string" },
@@ -415,6 +419,9 @@ export async function main(args: string[], io: IO = process): Promise<number> {
         }
         if (values.watch != null) {
             options.watch = values.watch;
+        }
+        if (values["source-maps"] != null) {
+            options.sourceMaps = values["source-maps"];
         }
         if (positionals.length > 0) {
             options.files = positionals;

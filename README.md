@@ -50,12 +50,6 @@ To list supported command line options run this:
 npx ntest --help
 ```
 
-Additional Node options can be passed after a `--` separator:
-
-```
-npx ntest --coverage -- --no-warnings
-```
-
 ## Configuration
 
 The configuration file supports the following settings:
@@ -64,6 +58,9 @@ The configuration file supports the following settings:
 {
     /** List of test files to run or glob patterns to match test files. */
     files?: string | string[];
+
+    /** Enables source map support for stack traces. */
+    sourceMaps?: boolean;
 
     /**
      * Reporters and output destinations to use. Standard "spec" reporter outputting to "stdout"

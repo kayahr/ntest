@@ -4,6 +4,7 @@
         "files1",
         "files2"
     ],
+    "sourceMaps": true,
     "concurrency": 12,
     "forceExit": true,
     "globalSetup": "global.js",

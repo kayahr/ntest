@@ -5,7 +5,7 @@
 
 import assert from "node:assert";
 import { beforeEach, describe, it } from "node:test";
-import { captureSpawn, IOCapture, withCwd, withProject } from "./utils.ts";
+import { IOCapture, captureSpawn, withCwd, withProject } from "./utils.ts";
 import { main } from "../main/ntest.ts";
 import { spawn } from "node:child_process";
 
@@ -106,6 +106,10 @@ const mappings: Array<{ ntest: string[], node: string[], nodeVersion?: number }>
     {
         ntest: [ "-w" ],
         node: [ "--watch" ]
+    },
+    {
+        ntest: [ "--source-maps" ],
+        node: [ "--enable-source-maps" ]
     }
 ];
 
@@ -249,6 +253,7 @@ describe("ntest", () => {
             "--test-rerun-failures=state",
             "--test-global-setup=global.js",
             "--watch",
+            "--enable-source-maps",
             "files1",
             "files2",
         ]);

@@ -58,6 +58,10 @@
             "description": "Run test at specific shard (e.g. \"1/3\").",
             "type": "string"
         },
+        "sourceMaps": {
+            "description": "Enables source map support for stack traces.",
+            "type": "boolean"
+        },
         "testPattern": {
             "description": "Run tests whose name matches this regular expression.",
             "anyOf": [
