@@ -130,26 +130,26 @@ describe("ntest", () => {
     });
 
     it("shows help on --help option", async () => {
-        const result = await main(io, [ "--help" ]);
+        const result = await main([ "--help" ], io);
         assert.equal(result, 0);
         assert.equal(io.capturedStderr, "");
         assert.match(io.capturedStdout, /^Usage: ntest /);
     });
     it("shows version information on --version option", async () => {
-        const result = await main(io, [ "--version" ]);
+        const result = await main([ "--version" ], io);
         assert.equal(result, 0);
         assert.equal(io.capturedStderr, "");
         assert.match(io.capturedStdout, /^ntest [0-9]+\.[0-9]+\.[0-9]+\n/);
     });
     it("passes through options to Node after '--' separator", async (t) => {
         const params = captureSpawn(t);
-        await withProject("empty-project", () => main(io, [ "--", "--help" ]));
+        await withProject("empty-project", () => main([ "--", "--help" ], io));
         assert.equal(params.at(-1), "--help");
     });
     it("runs Node Test with default options when no other options are given", async (t) => {
         const params = captureSpawn(t);
         await withProject("empty-project", async () => {
-            await main(io, []);
+            await main([], io);
         });
         assert.deepEqual(params, [ "--test" ]);
     });
@@ -161,38 +161,38 @@ describe("ntest", () => {
                 }
                 const params = captureSpawn(t);
                 await withProject("empty-project", async () => {
-                    await main(io, mapping.ntest);
+                    await main(mapping.ntest, io);
                 });
                 assert.deepEqual(params, [ "--test", ...mapping.node ]);
             });
         }
     });
     it("throws error when no package root could be found", async () => {
-        const result = await withCwd("/tmp", () => main(io, []));
+        const result = await withCwd("/tmp", () => main([], io));
         assert.equal(io.capturedStderr, "ntest: Unable to locate package.json\n");
         assert.equal(io.capturedStdout, "");
         assert.equal(result, 1);
     });
     it("throws error when passing invalid option to node", async () => {
-        const result = await withProject("empty-project", () => main(io, [ "--", "--wrong-param" ]));
+        const result = await withProject("empty-project", () => main([ "--", "--wrong-param" ], io));
         assert.equal(io.capturedStderr, "node: bad option: --wrong-param\nntest: Node exited with code 9\n");
         assert.equal(io.capturedStdout, "");
         assert.equal(result, 1);
     });
     it("throws error when config can not be parsed", async () => {
-        const result = await withProject("broken-config", () => main(io, []));
+        const result = await withProject("broken-config", () => main([], io));
         assert.match(io.capturedStderr, /^ntest: Error while reading config '.*ntest\.json': /);
         assert.equal(io.capturedStdout, "");
         assert.equal(result, 1);
     });
     it("runs Node Test with default options when configuration is empty", async (t) => {
         const params = captureSpawn(t);
-        await withProject("empty-config", () => main(io, []));
+        await withProject("empty-config", () => main([], io));
         assert.deepEqual(params, [ "--test" ]);
     });
     it("runs Node Test with correct options from small configuration", async (t) => {
         const params = captureSpawn(t);
-        await withProject("small-config", () => main(io, []));
+        await withProject("small-config", () => main([], io));
         assert.deepEqual(params, [
             "--test",
             "--experimental-test-coverage",
@@ -201,7 +201,7 @@ describe("ntest", () => {
     });
     it("runs Node Test with correct options from package.json configuration", async (t) => {
         const params = captureSpawn(t);
-        await withProject("package-config", () => main(io, []));
+        await withProject("package-config", () => main([], io));
         assert.deepEqual(params, [
             "--test",
             "--experimental-test-coverage",
@@ -210,7 +210,7 @@ describe("ntest", () => {
     });
     it("runs Node Test with correct options from a custom configuration file using --config option", async (t) => {
         const params = captureSpawn(t);
-        await withProject("custom-config", () => main(io, [ "--config", "ntest.config.json" ]));
+        await withProject("custom-config", () => main([ "--config", "ntest.config.json" ], io));
         assert.deepEqual(params, [
             "--test",
             "foo.js",
@@ -218,7 +218,7 @@ describe("ntest", () => {
     });
     it("runs Node Test with correct options from a custom configuration file using -c option", async (t) => {
         const params = captureSpawn(t);
-        await withProject("custom-config", () => main(io, [ "-c", "ntest.config.json" ]));
+        await withProject("custom-config", () => main([ "-c", "ntest.config.json" ], io));
         assert.deepEqual(params, [
             "--test",
             "foo.js",
@@ -227,7 +227,7 @@ describe("ntest", () => {
     it("runs Node Test with correct options from big configuration", async (t) => {
         const params = captureSpawn(t);
         t.mock.property(process.versions, "node", "24.0.0");
-        await withProject("big-config", () => main(io, []));
+        await withProject("big-config", () => main([], io));
         assert.deepEqual(params, [
             "--test",
             "--test-reporter=dot",

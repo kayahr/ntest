@@ -19,5 +19,6 @@
     "oxc.typeAware": true,
     "coverage-gutters.coverageFileNames": [
         "lib/test/lcov.info"
-    ]
+    ],
+    "oxc.enable": true
 }

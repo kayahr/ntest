@@ -17,7 +17,10 @@ const defaultConfigLocations = [
     ".ntest.json"
 ];
 
-interface IO {
+/**
+ * CLI IO interface with stdout and stderr.
+ */
+export interface IO {
     stdout: NodeJS.WritableStream;
     stderr: NodeJS.WritableStream;
 };
@@ -138,12 +141,14 @@ Additional Node options can be specified after '--'. Example:
 
   ntest --coverage -- --no-warnings
 
-Report bugs to <${packageJSON.bugs}>.\n`;
+Report bugs to <${packageJSON.bugs}>.
+`;
 
 /** The version text. */
 const version = `${commandName} ${packageJSON.version}
 
-Written by ${packageJSON.author.name} <${packageJSON.author.email}>\n`;
+Written by ${packageJSON.author.name} <${packageJSON.author.email}>
+`;
 
 /**
  * Spawns Node with given parameters.
@@ -295,11 +300,11 @@ async function runNodeTest(io: IO, options: NTestOptions): Promise<void> {
 /**
  * Main function.
  *
- * @param io   - The stdout/stderr streams
  * @param args - The command line arguments (`process.argv.slice(2)`)
+ * @param io   - Optional custom stdout/stderr streams. Defaults to Node.js `process`.
  * @returns The exit code
  */
-export async function main(io: IO, args: string[]): Promise<number> {
+export async function main(args: string[], io: IO = process): Promise<number> {
     try {
         const { values, positionals } = parseArgs({
             args,
@@ -428,5 +433,5 @@ export async function main(io: IO, args: string[]): Promise<number> {
 }
 
 if (import.meta.main) {
-    process.exitCode = await main(process, process.argv.slice(2));
+    process.exitCode = await main(process.argv.slice(2));
 }
