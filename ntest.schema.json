@@ -111,6 +111,10 @@
             "description": "Run in watch mode.",
             "type": "boolean"
         },
+        "exposeGC": {
+            "description": "Expose garbage collector.",
+            "type": "boolean"
+        },
         "coverage": {
             "$ref": "#/$defs/Coverage"
         }
