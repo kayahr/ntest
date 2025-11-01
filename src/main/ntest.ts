@@ -28,7 +28,9 @@ export interface IO {
 /**
  * Options for {@link runNodeTest}.
  */
-interface NTestOptions {
+export interface NTestOptions {
+    $schema?: string;
+
     /** List of test files to run or glob patterns to match test files. */
     files?: string | string[];
 

@@ -59,6 +59,7 @@
         "clean": "rm -rf lib",
         "build": "run build:*",
         "build:compile": "tsc",
+        "build:schema": "ts-json-schema-generator -f tsconfig.json -t NTestOptions > ntest.schema.json",
         "test": "run test:*",
         "test:unit": "node lib/main/ntest.js",
         "test:lint": "oxlint --type-aware --deny-warnings",
@@ -70,6 +71,7 @@
         "@kayahr/cspell": "9.2.2-bundle.1",
         "@kayahr/npm-utils": "1.1.0",
         "@kayahr/oxlint-config": "1.8.0",
+        "@kayahr/ts-json-schema-generator": "2.4.0-bundle.1",
         "@types/node": "24.9.2",
         "typescript": "5.9.3"
     }
