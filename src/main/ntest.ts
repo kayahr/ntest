@@ -85,6 +85,9 @@ interface NTestOptions {
     /** Run in watch mode. */
     watch?: boolean;
 
+    /** Expose garbage collector. */
+    exposeGC?: boolean;
+
     /** Optional coverage thresholds (only used when coverage is enabled) */
     coverage?: {
         /** Enable code coverage in the test runner. */
@@ -123,6 +126,7 @@ Options:
   --coverage-lines <n>         line coverage threshold in percent
   --coverage-exclude <glob>    exclude files in coverage report matching this glob pattern. Can be used multiple times
   --coverage-include <glob>    include files in coverage report matching this glob pattern. Can be used multiple times
+  --expose-gc                  expose garbage collector
   --force-exit                 force test runner to exit upon completion
   --global-setup <file>        specifies the path to the global setup file
   --isolation <s>              configures the type of test isolation used in the test runner ('none' or 'process')
@@ -287,6 +291,9 @@ async function runNodeTest(io: IO, options: NTestOptions): Promise<void> {
     if (options?.watch === true) {
         params.push("--watch");
     }
+    if (options?.exposeGC === true) {
+        params.push("--expose-gc");
+    }
     if (options?.sourceMaps === true) {
         params.push("--enable-source-maps");
     }
@@ -323,6 +330,7 @@ export async function main(args: string[], io: IO = process): Promise<number> {
                 "coverage-lines": { type: "string" },
                 "coverage-exclude": { type: "string", multiple: true },
                 "coverage-include": { type: "string", multiple: true },
+                "expose-gc": { "type": "boolean" },
                 "force-exit": { type: "boolean" },
                 "global-setup": { type: "string" },
                 "isolation": { type: "string" },
@@ -419,6 +427,9 @@ export async function main(args: string[], io: IO = process): Promise<number> {
         }
         if (values.watch != null) {
             options.watch = values.watch;
+        }
+        if (values["expose-gc"] != null) {
+            options.exposeGC = values["expose-gc"];
         }
         if (values["source-maps"] != null) {
             options.sourceMaps = values["source-maps"];

@@ -112,6 +112,9 @@ The configuration file supports the following settings:
     /** Run in watch mode. */
     watch?: boolean;
 
+    /** Expose garbage collector. */
+    exposeGC?: boolean;
+
     /** Optional coverage thresholds (only used when coverage is enabled) */
     coverage?: {
         /** Enable code coverage in the test runner. */

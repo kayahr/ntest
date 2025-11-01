@@ -108,6 +108,10 @@ const mappings: Array<{ ntest: string[], node: string[], nodeVersion?: number }>
         node: [ "--watch" ]
     },
     {
+        ntest: [ "--expose-gc" ],
+        node: [ "--expose-gc" ]
+    },
+    {
         ntest: [ "--source-maps" ],
         node: [ "--enable-source-maps" ]
     }
