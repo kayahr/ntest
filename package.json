@@ -70,7 +70,7 @@
     "devDependencies": {
         "@kayahr/cspell": "9.2.2-bundle.1",
         "@kayahr/npm-utils": "1.1.0",
-        "@kayahr/oxlint-config": "1.8.0",
+        "@kayahr/oxlint-config": "1.9.0",
         "@kayahr/ts-json-schema-generator": "2.4.0-bundle.1",
         "@types/node": "24.9.2",
         "typescript": "5.9.3"

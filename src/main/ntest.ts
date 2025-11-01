@@ -164,8 +164,15 @@ Written by ${packageJSON.author.name} <${packageJSON.author.email}>
  */
 function spawnNode(io: IO, params: string[]): Promise<void> {
     return new Promise((resolve, reject) => {
+        const env = { ...process.env };
+        if (params.includes("--expose-gc")) {
+            // For some reason expose-gc does not work as parameter but works as NODE_OPTIONS env variable. Maybe because node test spawns sub processes
+            // which inherit the env variables but not the command line options
+            env["NODE_OPTIONS"] = `--expose-gc ${env["NODE_OPTIONS"]} ?? ""`;
+        }
         const child = cp.spawn("node", params, {
-            stdio: [ "inherit", io.stdout === process.stdout ? "inherit" : "pipe", io.stderr === process.stderr ? "inherit" : "pipe" ]
+            stdio: [ "inherit", io.stdout === process.stdout ? "inherit" : "pipe", io.stderr === process.stderr ? "inherit" : "pipe" ],
+            env
         });
         child.stdout?.pipe(io.stdout, { end: false });
         child.stderr?.pipe(io.stderr, { end: false });
@@ -332,7 +339,7 @@ export async function main(args: string[], io: IO = process): Promise<number> {
                 "coverage-lines": { type: "string" },
                 "coverage-exclude": { type: "string", multiple: true },
                 "coverage-include": { type: "string", multiple: true },
-                "expose-gc": { "type": "boolean" },
+                "expose-gc": { type: "boolean" },
                 "force-exit": { type: "boolean" },
                 "global-setup": { type: "string" },
                 "isolation": { type: "string" },
