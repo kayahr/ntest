@@ -115,6 +115,9 @@ The configuration file supports the following settings:
     /** Expose garbage collector. */
     exposeGC?: boolean;
 
+    /** ES modules to preload. */
+    import?: string[];
+
     /** Optional coverage thresholds (only used when coverage is enabled) */
     coverage?: {
         /** Enable code coverage in the test runner. */

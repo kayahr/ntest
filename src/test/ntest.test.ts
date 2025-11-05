@@ -114,6 +114,14 @@ const mappings: Array<{ ntest: string[], node: string[], nodeVersion?: number }>
     {
         ntest: [ "--source-maps" ],
         node: [ "--enable-source-maps" ]
+    },
+    {
+        ntest: [ "--import", "./lib1.js" ],
+        node: [ "--import=./lib1.js" ]
+    },
+    {
+        ntest: [ "--import", "./lib1.js", "--import", "./lib2.js" ],
+        node: [ "--import=./lib1.js", "--import=./lib2.js" ]
     }
 ];
 

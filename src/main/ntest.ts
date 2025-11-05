@@ -90,6 +90,9 @@ export interface NTestOptions {
     /** Expose garbage collector. */
     exposeGC?: boolean;
 
+    /** ES modules to preload. */
+    import?: string[];
+
     /** Optional coverage thresholds (only used when coverage is enabled) */
     coverage?: {
         /** Enable code coverage in the test runner. */
@@ -131,6 +134,7 @@ Options:
   --expose-gc                  expose garbage collector
   --force-exit                 force test runner to exit upon completion
   --global-setup <file>        specifies the path to the global setup file
+  --import <module>            ES module to preload. Can be used multiple times
   --isolation <s>              configures the type of test isolation used in the test runner ('none' or 'process')
   --module-mocks               enable module mocking in the test runner
   --only                       run tests with 'only' option set.
@@ -306,6 +310,9 @@ async function runNodeTest(io: IO, options: NTestOptions): Promise<void> {
     if (options?.sourceMaps === true) {
         params.push("--enable-source-maps");
     }
+    for (const name of options?.import ?? []) {
+        params.push(`--import=${name}`);
+    }
 
     // Append test file globs
     for (const pattern of [ options?.files ?? []].flat()) {
@@ -342,6 +349,7 @@ export async function main(args: string[], io: IO = process): Promise<number> {
                 "expose-gc": { type: "boolean" },
                 "force-exit": { type: "boolean" },
                 "global-setup": { type: "string" },
+                "import": { type: "string", multiple: true },
                 "isolation": { type: "string" },
                 "module-mocks": { type: "boolean" },
                 only: { type: "boolean" },
@@ -439,6 +447,9 @@ export async function main(args: string[], io: IO = process): Promise<number> {
         }
         if (values["expose-gc"] != null) {
             options.exposeGC = values["expose-gc"];
+        }
+        if (values.import != null) {
+            options.import = values.import;
         }
         if (values["source-maps"] != null) {
             options.sourceMaps = values["source-maps"];
