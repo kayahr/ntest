@@ -33,7 +33,7 @@ export class IOCapture {
 }
 
 export function captureSpawn(t: it.TestContext): unknown[] {
-    let capturedParams: unknown[] = [];
+    const capturedParams: unknown[] = [];
     t.mock.method(cp, "spawn", (command: string, params: unknown[]) => {
         capturedParams.push(...params);
         const fake = new EventEmitter();
