@@ -172,7 +172,7 @@ function spawnNode(io: IO, params: string[]): Promise<void> {
         if (params.includes("--expose-gc")) {
             // For some reason expose-gc does not work as parameter but works as NODE_OPTIONS env variable. Maybe because node test spawns sub processes
             // which inherit the env variables but not the command line options
-            env["NODE_OPTIONS"] = `--expose-gc ${env["NODE_OPTIONS"]} ?? ""`;
+            env.NODE_OPTIONS = `--expose-gc ${env.NODE_OPTIONS} ?? ""`;
         }
         const child = cp.spawn("node", params, {
             stdio: [ "inherit", io.stdout === process.stdout ? "inherit" : "pipe", io.stderr === process.stderr ? "inherit" : "pipe" ],
