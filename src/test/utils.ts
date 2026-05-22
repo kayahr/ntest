@@ -15,10 +15,10 @@ import { join } from "node:path";
  */
 export class IOCapture {
     /** The capturing stdout stream. */
-    readonly stdout = new PassThrough();
+    public readonly stdout = new PassThrough();
 
     /** The capturing stderr stream. */
-    readonly stderr = new PassThrough();
+    public readonly stderr = new PassThrough();
 
     /** The captured stdout text. */
     public capturedStdout = "";
