@@ -68,11 +68,11 @@
         "start": "node lib/main/ntest.js"
     },
     "devDependencies": {
-        "@kayahr/cspell": "9.7.0-bundle.1",
+        "@kayahr/cspell": "10.0.1-bundle.1",
         "@kayahr/npm-utils": "1.1.2",
-        "@kayahr/oxlint-config": "1.33.0",
+        "@kayahr/oxlint-config": "1.35.0",
         "@kayahr/ts-json-schema-generator": "2.9.0-bundle.1",
-        "@types/node": "25.9.1",
+        "@types/node": "25.9.2",
         "typescript": "6.0.3"
     }
 }
